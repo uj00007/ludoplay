@@ -1,11 +1,26 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ludoplay/components/dice.dart';
 import 'package:ludoplay/components/ludo_board.dart';
+import 'package:ludoplay/utils/common.dart';
+import 'package:ludoplay/utils/locator.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    setupLocator();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,6 +43,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  FirebaseApp app;
+  FirebaseDatabase database = locator<FirebaseDatabase>();
+  @override
+  void initState() {
+    super.initState();
+    setupdatabase();
+  }
+
+  void setupdatabase() async {
+    app = await FirebaseApp.configure(
+        name: 'ludo-192cc',
+        options: const FirebaseOptions(
+            googleAppID: '1:433188034501:android:f50f52b4597a6f74b39dac',
+            apiKey: '433188034501',
+            databaseURL: 'https://ludo-192cc.firebaseio.com/'));
+    database = FirebaseDatabase(app: app);
+    // getEvent();
+  }
+
+  getEvent() {
+    database.reference().child('games').onChildChanged.listen((Event e) {
+      print('event updated called');
+      print(e.snapshot.value);
+    });
+    // database.reference().child('games').onChildAdded.listen((Event e) {
+    //   print('event added called');
+
+    //   print(e.snapshot.value);
+    // });
+    // database.reference().child('games').once().then((DataSnapshot snapshot) {
+    //   // print('value ${snapshot.value}');
+    //   if (snapshot.value != null) {
+    //     print(snapshot.value);
+    //   }
+    // });
+  }
+
   Widget diceQueue() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
