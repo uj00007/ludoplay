@@ -67,8 +67,6 @@ class _LudoBoardState extends State<LudoBoard> {
       }
       tiles.add(temp);
     }
-    print(tiles.length);
-    print(tiles[0].length);
     return Column(
         children: tiles.map((row) {
       return LudoBoardRow(

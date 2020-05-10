@@ -7,7 +7,14 @@ import 'package:ludoplay/utils/random_gereator.dart';
 
 class Dice extends StatefulWidget {
   var size;
-  Dice({Key key, this.size = 60.0}) : super(key: key);
+  Function turnSwitchCallback;
+  Function diceQueueListAdderFunction;
+  Dice(
+      {Key key,
+      this.size = 60.0,
+      this.turnSwitchCallback,
+      this.diceQueueListAdderFunction})
+      : super(key: key);
 
   @override
   _DiceState createState() => _DiceState();
@@ -17,6 +24,7 @@ class _DiceState extends State<Dice> with TickerProviderStateMixin {
   AnimationController _controller;
   FirebaseDatabase database = locator<FirebaseDatabase>();
   var diceNumber = randomDiceValueGenerator();
+  var diceStack = [];
 
   @override
   void initState() {
@@ -54,11 +62,21 @@ class _DiceState extends State<Dice> with TickerProviderStateMixin {
   }
 
   diceRoll() {
+    var numberRolled = randomDiceValueGenerator();
+    diceStack.add(numberRolled);
+    print(numberRolled);
+    // if (widget.turnSwitchCallback != null && numberRolled != 6) {
+    //   widget.turnSwitchCallback();
+    // }
+
     this.setState(() {
-      this.diceNumber = randomDiceValueGenerator();
+      this.diceNumber = numberRolled;
     });
     _controller.repeat();
     _controller.forward();
+    if (widget.diceQueueListAdderFunction != null) {
+      widget.diceQueueListAdderFunction(numberRolled);
+    }
   }
 
   @override
