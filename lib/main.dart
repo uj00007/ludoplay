@@ -9,6 +9,7 @@ import 'package:ludoplay/components/ludo_board.dart';
 import 'package:ludoplay/utils/common.dart';
 import 'package:ludoplay/utils/dice_json_setter.dart';
 import 'package:ludoplay/utils/locator.dart';
+import 'dart:io' show Platform;
 
 void main() => runApp(MyApp());
 
@@ -55,13 +56,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void setupdatabase() async {
-    app = await FirebaseApp.configure(
-        name: 'ludo-192cc',
-        options: const FirebaseOptions(
-            googleAppID: '1:433188034501:android:f50f52b4597a6f74b39dac',
-            apiKey: '433188034501',
-            databaseURL: 'https://ludo-192cc.firebaseio.com/'));
-    database = FirebaseDatabase(app: app);
+    if (Platform.isAndroid) {
+      app = await FirebaseApp.configure(
+          name: 'ludo-192cc',
+          options: const FirebaseOptions(
+              googleAppID: '1:433188034501:android:f50f52b4597a6f74b39dac',
+              apiKey: '433188034501',
+              databaseURL: 'https://ludo-192cc.firebaseio.com/'));
+      database = FirebaseDatabase(app: app);
+    } else {
+      app = await FirebaseApp.configure(
+          name: 'ludo-192cc',
+          options: const FirebaseOptions(
+            apiKey: 'AIzaSyBK9YFMvr-W-vhV9wQRdrNn4k6gh5ZzIaA',
+              googleAppID: '1:433188034501:ios:fb8dff895d926947b39dac',
+              gcmSenderID: '433188034501',
+              databaseURL: 'https://ludo-192cc.firebaseio.com/'));
+      database = FirebaseDatabase(app: app);
+    }
+    print("gooottttt");
     // getEvent();
   }
 

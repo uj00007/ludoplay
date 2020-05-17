@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>433188034501-gb70pe2h7u22r9ji8vk0lj80g6jv27rv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.433188034501-gb70pe2h7u22r9ji8vk0lj80g6jv27rv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBK9YFMvr-W-vhV9wQRdrNn4k6gh5ZzIaA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>433188034501</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ludoplay</string>
+	<key>PROJECT_ID</key>
+	<string>ludo-192cc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ludo-192cc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:433188034501:ios:fb8dff895d926947b39dac</string>
+	<key>DATABASE_URL</key>
+	<string>https://ludo-192cc.firebaseio.com</string>
+</dict>
+</plist>
