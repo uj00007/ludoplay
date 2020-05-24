@@ -104,9 +104,7 @@ class LudoBoardRow extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Row(
-        children: children
-            .map((squareName) => BoardTile(squareName: squareName))
-            .toList(),
+        children: children.map((squareName) => BoardTile(squareName: squareName)).toList(),
       ),
     );
   }
@@ -127,17 +125,34 @@ class _BoardTileState extends State<BoardTile> {
     if (isRed(widget.squareName))
       return Expanded(
         flex: 1,
-        child: Container(
-          decoration: BoxDecoration(color: Color(0xffFE4D5A)),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(color: Color(0xffFE4D5A)),
+            ),
+            Center(child: Text(widget.squareName.toString())
+                //  Icon(Icons.album, color: Colors.black,size: 25.0,)
+                )
+          ],
         ),
       );
     if (isGreen(widget.squareName))
       return Expanded(
-        flex: 1,
-        child: Container(
-          decoration: BoxDecoration(color: Color(0xff15D48F)),
-        ),
-      );
+          flex: 1,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(color: Color(0xff15D48F)),
+              ),
+              Center(child: Text(widget.squareName.toString())
+                  //  Icon(Icons.album, color: Colors.black,size: 25.0,)
+                  )
+            ],
+          )
+          // Container(
+          //   decoration: BoxDecoration(color: Color(0xff15D48F)),
+          // ),
+          );
     if (isYellow(widget.squareName))
       return Expanded(
         flex: 1,
@@ -161,10 +176,20 @@ class _BoardTileState extends State<BoardTile> {
       );
     return Expanded(
       flex: 1,
-      child: Container(
-        decoration:
-            BoxDecoration(color: Colors.white, border: Border.all(width: 0.3)),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(color: Colors.white),
+          ),
+          Center(child: Text(widget.squareName.toString())
+              //  Icon(Icons.album, color: Colors.black,size: 25.0,)
+              )
+        ],
       ),
+      // Container(
+      //   decoration:
+      //       BoxDecoration(color: Colors.white, border: Border.all(width: 0.3)),
+      // ),
     );
   }
 
@@ -225,9 +250,7 @@ class _BoardTileState extends State<BoardTile> {
   }
 
   bool isHome(val) {
-    if ((val >= 112 && val <= 114) ||
-        (val >= 127 && val <= 129) ||
-        (val >= 97 && val <= 99)) {
+    if ((val >= 112 && val <= 114) || (val >= 127 && val <= 129) || (val >= 97 && val <= 99)) {
       return true;
     }
     return false;
